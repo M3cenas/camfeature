@@ -8,6 +8,7 @@ import PlaceList from '../screens/place-list';
 import PlaceDetail from '../screens/place-detail';
 import NewPlace from '../screens/new-place';
 import Map from '../screens/map';
+import HeaderButton from '../components/header-button';
 
 const mainStack = createNativeStackNavigator();
 
@@ -28,7 +29,10 @@ const MainStackNavigator = () => {
       <mainStack.Screen
         name="Place"
         component={PlaceList}
-        options={{title: 'Places'}}
+        options={({navigation}) => ({
+          title: 'Places',
+          headerRight: () => <HeaderButton navigation={navigation} />,
+        })}
       />
       <mainStack.Screen
         name="PlaceDetail"
