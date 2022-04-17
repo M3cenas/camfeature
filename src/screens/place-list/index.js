@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {styles} from './styles';
 import {useSelector} from 'react-redux';
-import PlaceItem from '../../components/place-item';
+import PlaceItem from '../../components/molecules/place-item';
 
 const PlaceList = ({navigation}) => {
   const places = useSelector(state => state.places.places);

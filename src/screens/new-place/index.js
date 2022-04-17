@@ -4,6 +4,7 @@ import {styles} from './styles';
 import {COLORS} from '../../constants';
 import {useDispatch} from 'react-redux';
 import {placeActions} from '../../store/actions';
+import ImageSelector from '../../components/molecules/image-selector';
 
 const NewPlace = ({navigation}) => {
   const dispatch = useDispatch();
@@ -14,10 +15,13 @@ const NewPlace = ({navigation}) => {
     dispatch(placeActions.addPlace(name));
     navigation.navigate('Place');
   };
+  const handleOnImage = uri => console.log(uri);
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <Text style={styles.label}>Name</Text>
+        <ImageSelector onImage={handleOnImage} />
         <TextInput
           style={styles.input}
           onChangeText={handleNameChange}

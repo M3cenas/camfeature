@@ -8,7 +8,7 @@ import PlaceList from '../screens/place-list';
 import PlaceDetail from '../screens/place-detail';
 import NewPlace from '../screens/new-place';
 import Map from '../screens/map';
-import HeaderButton from '../components/header-button';
+import HeaderButton from '../components/atoms/header-button';
 
 const mainStack = createNativeStackNavigator();
 

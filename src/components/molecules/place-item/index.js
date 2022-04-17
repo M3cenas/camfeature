@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {COLORS} from '../../onstants';
+import {COLORS} from '../../../onstants';
 import {styles} from './styles';
 
 const PlaceItem = ({name, address, onSelect}) => {
