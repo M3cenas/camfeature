@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 15,
+    flexDirection: 'row',
     alignItems: 'center',
   },
   image: {

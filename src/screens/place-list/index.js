@@ -16,6 +16,7 @@ const PlaceList = ({navigation}) => {
       name={item.name}
       address="123 street, city, country"
       onSelect={() => onSelectDetail()}
+      image={item.image}
     />
   );
   return (

@@ -7,12 +7,14 @@ import {
   Image,
   PermissionsAndroid,
 } from 'react-native';
+import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 import * as ImagePicker from 'react-native-image-picker';
 import {COLORS} from '../../../constants';
 import {styles} from './styles';
 
 const ImageSelector = ({onImage}) => {
-  const [pickedUri, setPickedUri] = useState();
+  const [pickedResponse, setPickedResponse] = useState();
+  const IS_IOS = Platform.OS === 'ios';
 
   const verifyPermission = async () => {
     try {
@@ -36,35 +38,47 @@ const ImageSelector = ({onImage}) => {
     }
   };
 
-  const handlePickImage = async () => {
+  const handleTakePicture = async () => {
     const isCameraOk = await verifyPermission();
     if (!isCameraOk) return;
 
     let options = {
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
+      selectionLimit: 1,
+      mediaType: 'photo',
+      includeBase64: false,
     };
+    let granted;
+    if (IS_IOS) {
+      granted = await request(PERMISSIONS.IOS.CAMERA);
+    } else {
+      granted = await request(PERMISSIONS.ANDROID.CAMERA);
+    }
 
-    ImagePicker.launchCamera(options, response => {
-      setPickedUri(response.assets[0].uri);
-      onImage(response.assets[0].uri);
-    });
+    if (granted === RESULTS.GRANTED) {
+      ImagePicker.launchCamera(options, response => {
+        if (!response.didCancel && !response.error) {
+          console.log('aaa');
+          setPickedResponse(response.assets[0]);
+          onImage && onImage(response.assets[0].uri);
+        }
+      });
+    } else {
+      console.log('Permission denied');
+    }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.preview}>
-        {!pickedUri ? (
+        {!pickedResponse ? (
           <Text>No image picked yet</Text>
         ) : (
-          <Image source={{uri: pickedUri}} style={styles.image} />
+          <Image source={{uri: pickedResponse.uri}} style={styles.image} />
         )}
         <Button
           title="Pick Image"
           color={COLORS.primaryColor}
-          onPress={handlePickImage}
+          onPress={handleTakePicture}
         />
       </View>
     </View>
