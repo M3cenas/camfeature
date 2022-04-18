@@ -10,7 +10,7 @@ init()
     console.log('DB initialized');
   })
   .catch(err => {
-    console.log('DB initialization failed');
+    console.log('DB initialization failed', err);
   });
 
 const App = () => {

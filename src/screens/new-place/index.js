@@ -13,7 +13,15 @@ const NewPlace = ({navigation}) => {
 
   const handleNameChange = text => setName(text);
   const handleSavePlace = () => {
-    dispatch(placeActions.addPlace(name, image));
+    dispatch(
+      placeActions.addPlace(
+        name,
+        image,
+        '123 baker street, London, England',
+        14.44,
+        20.01,
+      ),
+    );
     navigation.navigate('Place');
   };
   const handleOnImage = uri => {

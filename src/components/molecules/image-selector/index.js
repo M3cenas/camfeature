@@ -57,7 +57,6 @@ const ImageSelector = ({onImage}) => {
     if (granted === RESULTS.GRANTED) {
       ImagePicker.launchCamera(options, response => {
         if (!response.didCancel && !response.error) {
-          console.log('aaa');
           setPickedResponse(response.assets[0]);
           onImage && onImage(response.assets[0].uri);
         }
@@ -75,12 +74,12 @@ const ImageSelector = ({onImage}) => {
         ) : (
           <Image source={{uri: pickedResponse.uri}} style={styles.image} />
         )}
-        <Button
-          title="Pick Image"
-          color={COLORS.primaryColor}
-          onPress={handleTakePicture}
-        />
       </View>
+      <Button
+        title="Pick Image"
+        color={COLORS.primaryColor}
+        onPress={handleTakePicture}
+      />
     </View>
   );
 };
